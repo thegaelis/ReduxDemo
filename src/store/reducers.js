@@ -13,8 +13,14 @@ export const mainReducer = (state = initState, action) => {
       console.log('Reducer ADD'); //log the status
       return {...state, counter: state.counter + action.value};
     case REMOVE:
-      console.log('Reducer REMOVE'); //log the status
-      return {...state, counter: state.counter - action.value};
+      // Remain unchanged if the state is equal zero and remove if the state is larger than zero
+      if (state.counter === 0) {
+        console.log('Reducer return default');
+        return state;
+      } else {
+        console.log('Reducer REMOVE'); //log the status
+        return {...state, counter: state.counter - action.value};
+      }
     default:
       return state;
   }
